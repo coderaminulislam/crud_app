@@ -62,15 +62,15 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: ()async {
-         final result= await Navigator.push(
+        onPressed: () async {
+          final result = await Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) => const AddProductScreen(),
               ));
-         if(result == true){
-           _getProductList();
-         }
+          if (result == true) {
+            _getProductList();
+          }
         },
         child: const Icon(Icons.add),
       ),
@@ -94,14 +94,16 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           IconButton(
               onPressed: () async {
-              final result= await Navigator.push(
+                final result = await Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => UpdateProductScreen(product: product,),
+                      builder: (context) => UpdateProductScreen(
+                        product: product,
+                      ),
                     ));
-              if(result == true){
-                _getProductList();
-              }
+                if (result == true) {
+                  _getProductList();
+                }
               },
               icon: const Icon(Icons.edit)),
           IconButton(
@@ -181,11 +183,12 @@ class _HomeScreenState extends State<HomeScreen> {
       },
     );
   }
+
   Future<void> _deleteProductList(String productId) async {
     _getProductInProgress = true;
 
     setState(() {});
-     String deleteProductListUrl =
+    String deleteProductListUrl =
         'https://crud.teamrabbil.com/api/v1/DeleteProduct/${productId}';
     Uri uri = Uri.parse(deleteProductListUrl);
 
@@ -195,14 +198,11 @@ class _HomeScreenState extends State<HomeScreen> {
     if (response.statusCode == 200) {
       //data decode
       _getProductList();
-      }
-     else {
-     _getProductInProgress = false;
+    } else {
+      _getProductInProgress = false;
       setState(() {});
-      ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Delete Product Failed')));
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text('Delete Product Failed')));
     }
-
   }
 }
-

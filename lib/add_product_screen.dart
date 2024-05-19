@@ -170,9 +170,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
     Response response = await post(uri,
         body: jsonEncode(inputData),
         headers: {'content-type': 'application/json'});
-    print(response.statusCode);
-    print(response.body);
-    print(response.headers);
+
     _addNewProductInProgress = false;
     setState(() {});
 
